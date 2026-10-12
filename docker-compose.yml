@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ktp-ocr-api:
+    build: .
+    container_name: ktp-ocr-api-service
+    ports:
+      - "8000:8000"
+    environment:
+      - MINIMUM_AGE_REQUIRED=18
+      - OCR_USE_GPU=False
+      - MAX_IMAGE_SIZE_MB=15
+    restart: unless-stopped
+    volumes:
+      - easyocr_cache:/root/.EasyOCR
+
+volumes:
+  easyocr_cache:
